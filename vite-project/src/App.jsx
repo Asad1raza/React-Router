@@ -1,21 +1,55 @@
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import About from "./assets/About";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import About from "./about";
 import Home from "./Home";
+import Dashboard from "./Dashboard";
+import Navbar from "./Navbar";
+import "./Navbar.css";
+import ParaComp from "./ParaComp";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <div>
+        <Home />
+        <Navbar />
+      </div>
+    ),
+  },
+  {
+    path: "/about",
+    element: (
+      <div>
+        <About />
+        <Navbar />
+      </div>
+    ),
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <div>
+        <Dashboard />
+        <Navbar />
+      </div>
+    ),
+  },
+  {
+    path: "/student/:id",
+    element: (
+      <div>
+        <ParaComp />
+        <Navbar />
+      </div>
+    ),
+  },
+]);
 
 function App() {
   return (
-    <BrowserRouter>
-      <nav>
-        <Link to="/">Home</Link>
-        <br />
-        <Link to="/about">About</Link>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <RouterProvider router={router} />
+    </div>
   );
 }
 
