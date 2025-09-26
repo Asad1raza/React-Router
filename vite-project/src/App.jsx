@@ -5,6 +5,7 @@ import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
 import "./Navbar.css";
 import ParaComp from "./ParaComp";
+import Notfound from "./Notfound";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,12 @@ const router = createBrowserRouter([
         <Dashboard />
         <Navbar />
       </div>
+    ),
+  },
+   {
+    path: "*",
+    element: (
+      <Notfound/>
     ),
   },
   {

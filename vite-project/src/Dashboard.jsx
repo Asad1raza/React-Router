@@ -5,7 +5,7 @@ const Dashboard = () => {
   const navigate = useNavigate()
 
   function handleClick() {
-    navigate("/ ");
+    navigate("/");
   }
 
   return (

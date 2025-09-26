@@ -4,7 +4,7 @@ function Home() {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate("/about"); // ✅ About page pe navigate karega
+    navigate("/about"); // 
   }
 
   return (
