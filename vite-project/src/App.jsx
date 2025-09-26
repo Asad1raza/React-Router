@@ -1,62 +1,29 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import About from "./about";
-import Home from "./Home";
-import Dashboard from "./Dashboard";
-import Navbar from "./Navbar";
-import "./Navbar.css";
-import ParaComp from "./ParaComp";
-import Notfound from "./Notfound";
+import { Suspense, lazy, useState } from "react";
+import Reducer from "./Reducer";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <div>
-        <Home />
-        <Navbar />
-      </div>
-    ),
-  },
-  {
-    path: "/about",
-    element: (
-      <div>
-        <About />
-        <Navbar />
-      </div>
-    ),
-  },
-  {
-    path: "/dashboard",
-    element: (
-      <div>
-        <Dashboard />
-        <Navbar />
-      </div>
-    ),
-  },
-   {
-    path: "*",
-    element: (
-      <Notfound/>
-    ),
-  },
-  {
-    path: "/student/:id",
-    element: (
-      <div>
-        <ParaComp />
-        <Navbar />
-      </div>
-    ),
-  },
-]);
+// Lazy load User component
+const User = lazy(() => import("./User"));
 
 function App() {
+  const [load, setLoad] = useState(false);
+
   return (
-    <div>
-      <RouterProvider router={router} />
-    </div>
+    <>
+      <Reducer />
+      <br /><br />
+      <div>
+        <h1>Lazy Loading</h1>
+
+        {load ? (
+          <Suspense fallback={<h3>Loading....</h3>}>
+            <User />
+          </Suspense>
+        ) : null}
+
+        <button onClick={() => setLoad(true)}>Load User</button>
+        <button onClick={() => setLoad(false)}>Remove User</button>
+      </div>
+    </>
   );
 }
 

@@ -6,7 +6,7 @@ const Navbar = () => {
     <div>
       <ul>
         <li>
-          <NavLink to="/" className={({ isActive }) => (isActive ? "active-link" : "")}>
+          <NavLink to="/" className={({ isActive }) => (isActive ? "active-link" : "")} >
             Home Page
           </NavLink>
         </li>
