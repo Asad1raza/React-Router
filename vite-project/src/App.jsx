@@ -1,29 +1,61 @@
-import { Suspense, lazy, useState } from "react";
-import Reducer from "./Reducer";
-
-// Lazy load User component
-const User = lazy(() => import("./User"));
+import { useForm } from "react-hook-form";
+import "./App.css";
 
 function App() {
-  const [load, setLoad] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors,isSubmitting },
+  } = useForm();
+
+async function onSubmit(data) {
+  await new Promise((resolve)=> setTimeout(resolve,5000));
+
+    console.log("Submitting the Data", data);
+  }
 
   return (
-    <>
-      <Reducer />
-      <br /><br />
+    <form id="form" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <h1>Lazy Loading</h1>
+        <label htmlFor="">First Name:</label>
+        <input
+        className={errors.firstName ? 'input-error':''}
+          {...register("firstName", {
 
-        {load ? (
-          <Suspense fallback={<h3>Loading....</h3>}>
-            <User />
-          </Suspense>
-        ) : null}
-
-        <button onClick={() => setLoad(true)}>Load User</button>
-        <button onClick={() => setLoad(false)}>Remove User</button>
+            required: true,
+            minLength: { value: 3, message: "minLength atleast 3" },
+            maxLength: { value: 10, message: "maxLength atleast 10" },
+          })}
+        />
+        {errors.firstName && <p className="error-msg">{errors.firstName.message}</p>}
       </div>
-    </>
+      <div>
+        <label htmlFor="">Middle Name:</label>
+        <input
+         className={errors.MiddleName ? 'input-error':''}
+          {...register("MiddleName", {
+            required: true,
+            minLength: { value: 3, message: "minLength atleast 3" },
+            maxLength: { value: 6, message: "maxLength atleast 6" },
+          })}
+        />
+        {errors.MiddleName && <p className="error-msg">{errors.MiddleName.message}</p>}
+      </div>
+      <div>
+        <label htmlFor="">Last Name:</label>
+        <input
+        className={errors.LastName ? 'input-error':''}
+          {...register("LastName", {
+            required: true,
+            minLength: { value: 3, message: "minLength atleast 3" },
+            maxLength: { value: 6, message: "maxLength atleast 6" },
+          })}
+        />
+        {errors.LastName && <p className="error-msg">{errors.LastName.message}</p>}
+      </div>
+      <input type="submit" disabled={isSubmitting}
+      value={isSubmitting ? "Submitting" :"Submit"}/>
+    </form>
   );
 }
 

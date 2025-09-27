@@ -1,0 +1,48 @@
+#form {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: #ebe5e5;
+}
+.input-error{
+    border: 1px solid red;
+
+
+}
+.error-msg{
+    color: red;
+}
+
+
+#form div {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+
+    
+}
+
+
+#form label {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+
+    #form input {
+        padding: 10px;
+        font-size: 15px;
+        border: 1px solid #aaa;
+        border-radius: 6px;
+        outline: none;
+    }
+
+    #form input:focus {
+        border-color: teal;
+        box-shadow: 0 0 5px rgba(0, 128, 128, 0.4);
+    }
